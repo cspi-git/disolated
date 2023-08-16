@@ -11,6 +11,10 @@ const blocked = ["https://discord.com/error-reporting-proxy/web"]
 if(!args.length) return console.log("usage: node index.js <token>")
 
 app.on("ready", ()=>{
+    session.defaultSession.clearStorageData({
+        storages: ["appcache", "cookies", "filesystem", "indexdb", "localstorage", "shadercache", "websql", "serviceworkers", "cachestorage"]
+    })
+
     app.commandLine.appendSwitch("proxy-server", "socks5://127.0.0.1:9050")
     const mainWindow = new BrowserWindow({
         width: 800,
